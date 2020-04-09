@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+   web1:
+      image: "consul-mock-service"
+      networks:
+         - consul-secure
+      configs:
+         - source: cacert
+           target: /cacert.pem            
+         - source: web_mock_service
+           target: /consul-mock-service.json
+      secrets:
+         - web1_token
+           
+   web2:
+      image: "consul-mock-service"
+      networks:
+         - consul-secure
+      configs:
+         - source: cacert
+           target: /cacert.pem            
+         - source: web_mock_service
+           target: /consul-mock-service.json
+      secrets:
+         - web2_token
+            
+   web3:
+      image: "consul-mock-service"
+      networks:
+         - consul-secure
+      configs:
+         - source: cacert
+           target: /cacert.pem            
+         - source: web_mock_service
+           target: /consul-mock-service.json
+      secrets:
+         - web3_token
+   
+   configs:
+      cacert:
+         file: ./cacert.pem
+      web_mock_service:
+         file: ./web-service.json
+      web1_token:
+         external: true
+      web2_token:
+         external: true
+      web3_token:
+         external: true
+         
+      
+      
+      

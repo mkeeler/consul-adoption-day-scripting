@@ -1,0 +1,6 @@
+{
+   "service": {
+      "service": "bar",
+      "port": 1234
+   }
+}
