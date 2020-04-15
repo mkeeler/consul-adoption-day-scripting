@@ -1,33 +1,28 @@
-export POLICY_DIR=/Users/mkeeler/consul-adoption-day/policies
+export WEB_TOKEN_1=
+export WEB_TOKEN_2=
+export WEB_TOKEN_3=
+export DB_TOKEN_1=
+export DB_TOKEN_2=
+export DB_TOKEN_3=
+export API_TOKEN_1=
+export API_TOKEN_2=
+export API_TOKEN_3=
+export MOCK_USE_KV=false
+export CONSUL_NAMESPACE=
+export CONSUL_WEB_NAMESPACE=
+export CONSUL_DB_NAMESPACE=
+export CONSUL_API_NAMESPACE=
 export CONSUL_CACERT=/Users/mkeeler/Code/repos/consul-docker-test/secure/consul-agent-ca.pem
 export CONSUL_HTTP_ADDR=https://localhost:8501
 export CONSUL_HTTP_TOKEN=df87bdaa-b277-42d5-9b40-98d5d0fba61f
+export MOCK_RAW_ERRORS=false
+export USE_NAMESPACES=
+export MOCK_USE_DISCO=false
+export MANAGE_DB_POLICY_ID=
+export MANAGE_API_POLICY_ID=
+export DB_ROLE=
+export API_ROLE=
 
-function consul-curl {
-   endpoint=$1
-   shift
-
-   NS_HEADER=""
-   if test -n "${CONSUL_NAMESPACE}"
-   then
-      NS_HEADER="-H 'X-Consul-Namespace: $CONSUL_NAMESPACE'"
-   fi
-
-   curl -s --cacert "$CONSUL_CACERT" \
-        -H "X-Consul-Token: $CONSUL_HTTP_TOKEN" \
-        $NS_HEADER \
-        $@ \
-        "${CONSUL_HTTP_ADDR}/v1/${endpoint}?pretty"
-}
-
-function consul-discover {
-   service=$1
-   shift
-   token=${1:-${CONSUL_HTTP_TOKEN}}
-   CONSUL_HTTP_TOKEN=${token} consul-curl "catalog/service/$service"
-}
-
-alias register-web="consul services register -name web -port 1234"
 
 alias freshen="source ../freshen.sh"
 alias import-web="source ../web-tokens.sh"

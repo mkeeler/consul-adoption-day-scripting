@@ -1,6 +1,7 @@
 FROM golang:latest as builder
 COPY . /consul-mock-service
 WORKDIR /consul-mock-service
+ENV CGO_ENABLED=0
 RUN go build
 
 FROM alpine:latest

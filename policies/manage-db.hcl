@@ -1,0 +1,3 @@
+service "db" {
+  policy = "write"
+}

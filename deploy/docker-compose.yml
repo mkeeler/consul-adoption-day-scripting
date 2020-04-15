@@ -3,52 +3,195 @@ version: '3.7'
 services:
    web1:
       image: "consul-mock-service"
+      hostname: "web1"
       networks:
          - consul-secure
-      configs:
-         - source: cacert
-           target: /cacert.pem            
-         - source: web_mock_service
+      volumes:
+         - type: bind
+           source: ./cacert.pem
+           target: /cacert.pem
+         - type: bind
+           source: ./web-service.json
            target: /consul-mock-service.json
-      secrets:
-         - web1_token
-           
+      environment:
+         CONSUL_CACERT: "/cacert.pem"
+         CONSUL_HTTP_ADDR: "https://consul-secure-ui:8501"
+         CONSUL_HTTP_TOKEN: "${WEB_TOKEN_1}"
+         MOCK_USE_KV: "${MOCK_USE_KV}"
+         MOCK_USE_DISCO: "${MOCK_USE_DISCO}"
+         CONSUL_NAMESPACE: "${CONSUL_WEB_NAMESPACE}"
+         MOCK_RAW_ERRORS: "${MOCK_RAW_ERRORS}"
+
    web2:
       image: "consul-mock-service"
+      hostname: "web2"
       networks:
          - consul-secure
-      configs:
-         - source: cacert
-           target: /cacert.pem            
-         - source: web_mock_service
+      volumes:
+         - type: bind
+           source: ./cacert.pem
+           target: /cacert.pem
+         - type: bind
+           source: ./web-service.json
            target: /consul-mock-service.json
-      secrets:
-         - web2_token
-            
+      environment:
+         CONSUL_CACERT: "/cacert.pem"
+         CONSUL_HTTP_ADDR: "https://consul-secure-ui:8501"
+         CONSUL_HTTP_TOKEN: "${WEB_TOKEN_2}"
+         MOCK_USE_KV: "${MOCK_USE_KV}"
+         MOCK_USE_DISCO: "${MOCK_USE_DISCO}"
+         CONSUL_NAMESPACE: "${CONSUL_WEB_NAMESPACE}"
+         MOCK_RAW_ERRORS: "${MOCK_RAW_ERRORS}"
+
    web3:
       image: "consul-mock-service"
+      hostname: "web3"
       networks:
          - consul-secure
-      configs:
-         - source: cacert
-           target: /cacert.pem            
-         - source: web_mock_service
+      volumes:
+         - type: bind
+           source: ./cacert.pem
+           target: /cacert.pem
+         - type: bind
+           source: ./web-service.json
            target: /consul-mock-service.json
-      secrets:
-         - web3_token
-   
-   configs:
-      cacert:
-         file: ./cacert.pem
-      web_mock_service:
-         file: ./web-service.json
-      web1_token:
-         external: true
-      web2_token:
-         external: true
-      web3_token:
-         external: true
-         
-      
-      
-      
+      environment:
+         CONSUL_CACERT: "/cacert.pem"
+         CONSUL_HTTP_ADDR: "https://consul-secure-ui:8501"
+         CONSUL_HTTP_TOKEN: "${WEB_TOKEN_3}"
+         MOCK_USE_KV: "${MOCK_USE_KV}"
+         MOCK_USE_DISCO: "${MOCK_USE_DISCO}"
+         CONSUL_NAMESPACE: "${CONSUL_WEB_NAMESPACE}"
+         MOCK_RAW_ERRORS: "${MOCK_RAW_ERRORS}"
+
+   db1:
+      image: "consul-mock-service"
+      hostname: "db1"
+      networks:
+         - consul-secure
+      volumes:
+         - type: bind
+           source: ./cacert.pem
+           target: /cacert.pem
+         - type: bind
+           source: ./db-service.json
+           target: /consul-mock-service.json
+      environment:
+         CONSUL_CACERT: "/cacert.pem"
+         CONSUL_HTTP_ADDR: "https://consul-secure-ui:8501"
+         CONSUL_HTTP_TOKEN: "${DB_TOKEN_1}"
+         MOCK_USE_KV: "${MOCK_USE_KV}"
+         MOCK_USE_DISCO: "${MOCK_USE_DISCO}"
+         CONSUL_NAMESPACE: "${CONSUL_DB_NAMESPACE}"
+         MOCK_RAW_ERRORS: "${MOCK_RAW_ERRORS}"
+
+   db2:
+      image: "consul-mock-service"
+      hostname: "db2"
+      networks:
+         - consul-secure
+      volumes:
+         - type: bind
+           source: ./cacert.pem
+           target: /cacert.pem
+         - type: bind
+           source: ./db-service.json
+           target: /consul-mock-service.json
+      environment:
+         CONSUL_CACERT: "/cacert.pem"
+         CONSUL_HTTP_ADDR: "https://consul-secure-ui:8501"
+         CONSUL_HTTP_TOKEN: "${DB_TOKEN_2}"
+         MOCK_USE_KV: "${MOCK_USE_KV}"
+         MOCK_USE_DISCO: "${MOCK_USE_DISCO}"
+         CONSUL_NAMESPACE: "${CONSUL_DB_NAMESPACE}"
+         MOCK_RAW_ERRORS: "${MOCK_RAW_ERRORS}"
+
+   db3:
+      image: "consul-mock-service"
+      hostname: "db3"
+      networks:
+         - consul-secure
+      volumes:
+         - type: bind
+           source: ./cacert.pem
+           target: /cacert.pem
+         - type: bind
+           source: ./db-service.json
+           target: /consul-mock-service.json
+      environment:
+         CONSUL_CACERT: "/cacert.pem"
+         CONSUL_HTTP_ADDR: "https://consul-secure-ui:8501"
+         CONSUL_HTTP_TOKEN: "${DB_TOKEN_3}"
+         MOCK_USE_KV: "${MOCK_USE_KV}"
+         MOCK_USE_DISCO: "${MOCK_USE_DISCO}"
+         CONSUL_NAMESPACE: "${CONSUL_DB_NAMESPACE}"
+         MOCK_RAW_ERRORS: "${MOCK_RAW_ERRORS}"
+
+   api1:
+      image: "consul-mock-service"
+      hostname: "api1"
+      networks:
+         - consul-secure
+      volumes:
+         - type: bind
+           source: ./cacert.pem
+           target: /cacert.pem
+         - type: bind
+           source: ./api-service.json
+           target: /consul-mock-service.json
+      environment:
+         CONSUL_CACERT: "/cacert.pem"
+         CONSUL_HTTP_ADDR: "https://consul-secure-ui:8501"
+         CONSUL_HTTP_TOKEN: "${API_TOKEN_1}"
+         MOCK_USE_KV: "${MOCK_USE_KV}"
+         MOCK_USE_DISCO: "${MOCK_USE_DISCO}"
+         CONSUL_NAMESPACE: "${CONSUL_API_NAMESPACE}"
+         MOCK_RAW_ERRORS: "${MOCK_RAW_ERRORS}"
+
+   api2:
+      image: "consul-mock-service"
+      hostname: "api2"
+      networks:
+         - consul-secure
+      volumes:
+         - type: bind
+           source: ./cacert.pem
+           target: /cacert.pem
+         - type: bind
+           source: ./api-service.json
+           target: /consul-mock-service.json
+      environment:
+         CONSUL_CACERT: "/cacert.pem"
+         CONSUL_HTTP_ADDR: "https://consul-secure-ui:8501"
+         CONSUL_HTTP_TOKEN: "${API_TOKEN_2}"
+         MOCK_USE_KV: "${MOCK_USE_KV}"
+         MOCK_USE_DISCO: "${MOCK_USE_DISCO}"
+         CONSUL_NAMESPACE: "${CONSUL_API_NAMESPACE}"
+         MOCK_RAW_ERRORS: "${MOCK_RAW_ERRORS}"
+
+   api3:
+      image: "consul-mock-service"
+      hostname: "api3"
+      networks:
+         - consul-secure
+      volumes:
+         - type: bind
+           source: ./cacert.pem
+           target: /cacert.pem
+         - type: bind
+           source: ./api-service.json
+           target: /consul-mock-service.json
+      environment:
+         CONSUL_CACERT: "/cacert.pem"
+         CONSUL_HTTP_ADDR: "https://consul-secure-ui:8501"
+         CONSUL_HTTP_TOKEN: "${API_TOKEN_3}"
+         MOCK_USE_KV: "${MOCK_USE_KV}"
+         MOCK_USE_DISCO: "${MOCK_USE_DISCO}"
+         CONSUL_NAMESPACE: "${CONSUL_API_NAMESPACE}"
+         MOCK_RAW_ERRORS: "${MOCK_RAW_ERRORS}"
+
+networks:
+  consul-secure:
+    external: true
+    name: consul-secure
+

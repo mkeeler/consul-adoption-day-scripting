@@ -1,13 +1,12 @@
 {
+   "use_agent_api": true,
    "service": {
-      "service": "web",
+      "service": "api",
       "port": 443
    },
    "upstream_services": [
-      {"service": "api", "namespace": "ns2"},
       {"service": "db", "namespace": "ns3"}
    ],
-   "use_agent_api": true,
    "kv_ops": [
       {
          "op": "read",

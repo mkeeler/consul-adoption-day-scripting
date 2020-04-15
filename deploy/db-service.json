@@ -1,0 +1,15 @@
+{
+   "use_agent_api": true,
+   "service": {
+      "service": "db",
+      "port": 3306
+   },
+   "kv_ops": [
+      {
+         "op": "write",
+         "key": "db/protocol",
+         "value": "1",
+         "namespace": "ns3"
+      }
+   ]
+}
